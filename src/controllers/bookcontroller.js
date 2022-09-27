@@ -94,6 +94,7 @@ const updateBook = async function (req, res) {
         let bookId = req.params.bookId;
         if (!mongoose.Types.ObjectId.isValid(bookId)) { return res.status(400).send({ status: false, message: "bookId is not valid" }) }
         let bookData = req.body;
+        let releasedAt= req.body.releasedAt;
         let { title, excerpt, ISBN } = bookData;
 
         //-----------------check body is empty or not-----------------------------------------------------------

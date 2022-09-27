@@ -41,6 +41,7 @@ const myValidUser = async (req, res, next) => {
       return res.status(400).send({ status: false, message: "please input phone section" });
 
     let number = req.body.phone;
+    
     if (await userModel.findOne({ phone: number }))
       return res.status(400).send({ status: false, message: "phone number is already taken" });
 
@@ -112,8 +113,10 @@ const bookValidation = async (req, res, next) => {
 
     //------------------------- REGEX ---------------------------------------------------------------------------------------------------------------
 
-    if (!/^[a-zA-Z ,]+$/i.test(title))
-      return res.status(400).send({ status: false, message: "please input valid title and first letter must be of Uppercase" });
+    
+    if (!/^[a-zA-Z0-9!@#$%^&*()_ +\-=\[\]{};':"\\|,.<>\/?]*$/i.test(title))
+    return res.status(400).send({ status: false, message: "please input valid title and first letter must be of Uppercase" });
+
 
     //------------------------- DB call ------------------------------------------------------------------------------------------------------
 

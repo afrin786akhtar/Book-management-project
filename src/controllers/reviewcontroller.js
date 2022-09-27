@@ -40,10 +40,12 @@ const reviews = async (req, res) => {
 
 const updateReview = async function (req, res) {
     try {
-        let bookId = req.params.bookId;
+        let data=req.params
+
+        let bookId = data.bookId;
         if (!mongoose.Types.ObjectId.isValid(bookId)) return res.status(400).send({ status: false, message: "bookId is not valid" })
 
-        let reviewId = req.params.reviewId
+        let reviewId = data.reviewId
         if (!mongoose.Types.ObjectId.isValid(reviewId)) return res.status(400).send({ status: false, message: "reviewId is not valid" })
 
         let reviewData = req.body
@@ -59,7 +61,7 @@ const updateReview = async function (req, res) {
         if (rating) {
             if (!/^\s*([1-5]){1}\s*$/.test(rating)) return res.status(400).send({ status: false, message: "ratings is accept only 1 to 5 digit only" })
         }
-        if (!/^[a-zA-Z ,]{3,}$/.test(review)) return res.status(400).send({ status: false, message: "enter valid review" });
+        if (!/^[a-zA-Z0-9!@#$%^&*()_ +\-=\[\]{};':"\\|,.<>\/?]*$/i.test(review)) return res.status(400).send({ status: false, message: "enter valid review" });
 
 
         //---------------------check if book exist in collection or not------------------------------------------------------------------------
