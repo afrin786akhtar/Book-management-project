@@ -1,11 +1,9 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
 const  mongoose  = require('mongoose');
 const app = express();
 
-app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.json());
 
 
 mongoose.connect("mongodb+srv://group45Database:LluRUzY3qvGKUVwo@project-3.hwz6k4u.mongodb.net/group45Database", {
