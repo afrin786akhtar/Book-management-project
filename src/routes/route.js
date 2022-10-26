@@ -6,40 +6,40 @@ const { reviews, updateReview, deleteReview } = require('../controllers/reviewco
 const { myValidUser, bookValidation, reviewBook } = require('../validation/validator')
 const { Authentication, Authorisation } = require('../middleware/auth')
 
-//----------dummy---------------------------------------------------------------------------------------------------------------------
+//----------dummy----------------------------
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
 
-//------------create user------------------------------------------------------------------------------------------------------------------------
+//------------create user----------------------
 router.post("/register", myValidUser, createUser)
 
-//-------------login------------------------------------------------------------------------------------------------------------------------
+//-------------login----------------------------
 router.post("/login", login)
 
-//-----------create book---------------------------------------------------------------------------------------------------------------------
+//-----------create book--------------------------
 router.post("/books", Authentication, bookValidation, createBook)
 
-//------------get books-----------------------------------------------------------------------------------------------------------------------
+//------------get books---------------------------
 router.get("/books", Authentication, getbook)
 
-//--------get by params---------------------------------------------------------------------------------------------------------------------
+//--------get by params----------------------------
 router.get("/books/:bookId", Authentication, getBookByParams)
 
-//-------------delete books-------------------------------------------------------------------------------------------------------------------
+//-------------delete books--------------------------
 router.delete("/books/:bookId", Authentication, Authorisation, deleteBook)
 
-//-----------------------------update------------------------------------------------------------------------------------------------------
+//-----------------------------update-----------------
 
 router.put("/books/:bookId", Authentication, Authorisation, updateBook)
 
-//--------------------------create review---------------------------------------------------------------------------------------------------
+//--------------------------create review---------------
 router.post("/books/:bookId/review", reviewBook, reviews)
 
-//-----------------updating the review------------------------------------------------------------------------------------------------------
+//-----------------updating the review-------------------
 router.put("/books/:bookId/review/:reviewId", updateReview)
 
-//-----------------deletereview------------------------------------------------------------------------------------------------------------
+//-----------------deletereview--------------------------
 router.delete("/books/:bookId/review/:reviewId", deleteReview)
 
 
