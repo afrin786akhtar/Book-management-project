@@ -4,7 +4,7 @@ const BookModel = require('../models/bookModel')
 const ReviewModel = require("../models/reviewModel")
 
 
-//===============================================create review==========================================================================================
+//===============================================create review=============================================
 const reviews = async (req, res) => {
     try {
         let data = req.body;
@@ -36,7 +36,7 @@ const reviews = async (req, res) => {
         return res.status(500).send({ status: false, message: err.message })
     }
 }
-//====================================================update review===================================================================================================
+//====================================================update review==========================================
 
 const updateReview = async function (req, res) {
     try {
