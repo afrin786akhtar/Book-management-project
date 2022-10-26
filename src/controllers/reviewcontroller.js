@@ -40,7 +40,7 @@ const reviews = async (req, res) => {
 
 const updateReview = async function (req, res) {
     try {
-        let data=req.params
+        let data = req.params
 
         let bookId = data.bookId;
         if (!mongoose.Types.ObjectId.isValid(bookId)) return res.status(400).send({ status: false, message: "bookId is not valid" })
@@ -64,12 +64,12 @@ const updateReview = async function (req, res) {
         if (!/^[a-zA-Z0-9!@#$%^&*()_ +\-=\[\]{};':"\\|,.<>\/?]*$/i.test(review)) return res.status(400).send({ status: false, message: "enter valid review" });
 
 
-        //---------------------check if book exist in collection or not------------------------------------------------------------------------
+        //---------------------check if book exist in collection or not-------------------------------------------------------------
         const book = await BookModel.findOne({ _id: bookId, isDeleted: false })
 
         if (!book) return res.status(404).send({ status: false, message: "No Book with this bookId was found in the reviewModel" })
 
-        //-------------------------checking the book is deleted already or present-------------------------------------------------------------------------
+        //-------------------------checking the book is deleted already or present---------------------------
         if (book.isDeleted == true) return res.status(400).send({ status: false, message: "Book is deleted so you not able to update it" })
 
         const rev = await ReviewModel.findById(reviewId)

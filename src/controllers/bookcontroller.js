@@ -48,7 +48,7 @@ const getbook = async function (req, res) {
         // ------------------------------get books-------------------------------------------------------- 
         const newgetBooks = await BookModel.find({ $and: [{ isDeleted: false }, que] }).select({ _id: 1, title: 1, excerpt: 1, userId: 1, category: 1, releasedAt: 1, reviews: 1 }).sort({ title: 1 })
 
-        //         // ---------------nothing found----------------------------------------------------------
+        // ---------------nothing found----------------------------------------------------------
         if (newgetBooks.length == 0 || newgetBooks == null) return res.status(404).send({ status: false, message: "no books found" })  //-------null is use because if i give wrong id with 28 character then it can not read properties of authorid so it gets back null 
 
         return res.status(200).send({ status: true, message: "Books list", data: newgetBooks });
