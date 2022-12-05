@@ -18,7 +18,7 @@ const reviews = async (req, res) => {
             return res.status(400).send({ status: true, message: "the book is already deleted" });
 
 
-        if (!data.bookId) data.bookId = bookId.toString();
+        // if (!data.bookId) data.bookId = bookId.toString();
 
         if (!data.reviewedBy) data.reviewedBy = "Guest";
         if (!data.reviewedAt) data.reviewedAt = new Date;
@@ -70,7 +70,7 @@ const updateReview = async function (req, res) {
         if (!book) return res.status(404).send({ status: false, message: "No Book with this bookId was found in the reviewModel" })
 
         //-------------------------checking the book is deleted already or present---------------------------
-        if (book.isDeleted == true) return res.status(400).send({ status: false, message: "Book is deleted so you not able to update it" })
+        //if (book.isDeleted == true) return res.status(400).send({ status: false, message: "Book is deleted so you not able to update it" })
 
         const rev = await ReviewModel.findById(reviewId)
         if (!rev) return res.status(404).send({ status: false, message: "No reviews with this reviewID was found in the reviewModel" })

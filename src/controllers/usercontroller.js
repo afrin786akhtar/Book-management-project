@@ -2,7 +2,7 @@ const userModel = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 
 
-//======================😮 user creation 😮==============================================================================================
+//====================== user creation =============================================================================================
 
 const createUser = async (req, res) => {
   try {
@@ -16,7 +16,7 @@ const createUser = async (req, res) => {
   }
 }
 
-//========================😎 user login 😎==============================================================================================
+//======================== user login =============================================================================================
 
 const login = async (req, res) => {
   
@@ -35,12 +35,12 @@ const login = async (req, res) => {
     // if eamil and password is correct
     let userLogin = await userModel.findOne({ email: email, password: password })
 
-    //-------------------------------😎token generation😎--------------------------------------------------
+    //-------------------------------token generation--------------------------------------------------
     const token = jwt.sign(
       {
         userId: userLogin._id,
         group: "45",
-        iat: Math.floor(Date.now() / 1000) - 30
+        iat: Math.floor(Date.now() / 1000)
       },
       "group-45",
       { expiresIn: "24h" });

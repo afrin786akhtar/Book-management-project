@@ -1,11 +1,9 @@
 const mongoose = require('mongoose')
-// const validUser = require("../validation/validUser")
 const BookModel = require('../models/bookModel')
 const userModel = require("../models/userModel")
 const ReviewModel = require("../models/reviewModel")
-// const ObjectId = mongoose.Schema.Types.ObjectId
 
-//==========================================😳 creating Books 😳=========================================================================
+//========================================== creating Books =========================================================================
 
 const createBook = async function (req, res) {
     try {
@@ -30,7 +28,7 @@ const createBook = async function (req, res) {
     }
 }
 
-//================================😊 get-book-details😊 ==================================================================================
+//================================ get-book-details ==================================================================================
 
 const getbook = async function (req, res) {
     try {
@@ -58,7 +56,7 @@ const getbook = async function (req, res) {
     }
 }
 
-//=====================================😮 get by query-params 😮=======================================================================================
+//===================================== get by query-params =======================================================================================
 
 const getBookByParams = async function (req, res) {
 
@@ -113,7 +111,7 @@ const updateBook = async function (req, res) {
             return res.status(400).send({ status: false, message: "Book is deleted so you cannot update it" });
 
         let updateBook = await BookModel.findOneAndUpdate(
-            { _id: bookId, isDeleted: false },
+            { _id: bookId },
             {
                 $set: {
                     title: title, excerpt: excerpt,
@@ -122,12 +120,14 @@ const updateBook = async function (req, res) {
             },
             { new: true }
         );
-        if (!updateBook) {
-            return res.status(404).send({ status: false, message: "bookId not found" })
-        }
-        else {
-            return res.status(200).send({ status: true, message: "book has been updated", data: updateBook })
-        }
+        // if (!updateBook) {
+        //     return res.status(404).send({ status: false, message: "bookId not found" })
+        // }
+        // else {
+        //     return res.status(200).send({ status: true, message: "book has been updated", data: updateBook })
+        // }
+        return res.status(200).send({ status: true, message: "book has been updated", data: updateBook })
+        
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message })
     }
